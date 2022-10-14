@@ -5,7 +5,6 @@ using DesafioGranto.Services.Interface;
 using DesafioGranto.Services;
 using DesafioGranto.Repositories.Interface;
 using DesafioGranto.Repositories;
-using DesafioGranto.Models.Entities;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,12 +16,12 @@ builder.Services.AddControllers();
 //Services
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-//builder.Services.AddScoped<IOportunidadeService, OportunidadeService>();
+builder.Services.AddScoped<IOportunidadeService, OportunidadeService>();
 
 //Repositories
 
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-//builder.Services.AddScoped<IOportunidadeRepository, OportunidadeRepository>();
+builder.Services.AddScoped<IOportunidadeRepository, OportunidadeRepository>();
 
 builder.Services.AddDbContext<DesafioContext>(opt =>
     opt.UseSqlServer("Password=sa123;Persist Security Info=True;User ID=sa;Initial Catalog=DesafioGranto;Data Source=DESKTOP-7PR90UG"));

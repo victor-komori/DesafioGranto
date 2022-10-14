@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DesafioGranto.Models;
 using DesafioGranto.Models.Entities;
+using DesafioGranto.Models.DTO;
+using DesafioGranto.Services.Interface;
+using DesafioGranto.Models.Utils;
 
 namespace DesafioGranto.Controllers
 {
@@ -8,22 +11,34 @@ namespace DesafioGranto.Controllers
     [ApiController]
     public class OportunidadesController : ControllerBase
     {
-        private readonly DesafioContext _context;
+        private readonly IOportunidadeService _oportunidadeService;
 
-        public OportunidadesController(DesafioContext context)
+        public OportunidadesController(IOportunidadeService oportunidadeService)
         {
-            _context = context;
+            _oportunidadeService = oportunidadeService;
         }
 
-        // POST: api/Oportunidades
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Cadastra uma nova oportunidade.
+        /// </summary>
+        /// <param name="oportunidadeCadastro"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<Oportunidade>> PostOportunidade(Oportunidade oportunidade)
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> CadastroOportunidade(OportunidadeCadastroDTO oportunidadeCadastro)
         {
-            //_context.Oportunidade.Add(oportunidade);
-            await _context.SaveChangesAsync();
+            Oportunidade oportunidade = new Oportunidade
+            {
+                Cnpj = CpfCnpjUtils.SemFormatacao(oportunidadeCadastro.Cnpj),
+                Nome = oportunidadeCadastro.Nome,
+                ValorMonetario = oportunidadeCadastro.Valor
+            };
 
-            return CreatedAtAction("GetOportunidade", new { id = oportunidade.Id }, oportunidade);
+            _oportunidadeService.Cadastrar(oportunidade);
+
+            return CreatedAtAction("CadastroOportunidade", new { message = "Oportunidade cadastrada com sucesso." });
         }
     }
 }

@@ -16,27 +16,15 @@ namespace DesafioGranto.Controllers
             _usuarioService = usuarioService;
         }
 
-        // GET: api/Usuarios/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Usuario>> GetUsuario(int id)
-        //{
-        //    var usuario = usuarioService();
-
-        //    if (usuario == null)
-        //    {
-        //        return NotFound();
-
-        //    }
-
-        //    return usuario;
-        //}
-
         /// <summary>
         /// Cadastra um novo usuário.
         /// </summary>
         /// <param name="usuarioCadastro"></param>
         /// <returns></returns>
         [HttpPost]
+        [Consumes("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> CadastroUsuario(UsuarioCadastroDTO usuarioCadastro)
         {
             var usuarioExistente = await _usuarioService.FindById(usuarioCadastro.Email);
@@ -53,12 +41,6 @@ namespace DesafioGranto.Controllers
             {
                 return Conflict(new { message = $"O e-mail '{usuarioCadastro.Email}' já foi cadastrado. Favor informar um outro e-mail." });
             }
-
-            //_context.Usuario.Add(usuario);
-            //await _context.SaveChangesAsync();
-
-            
-            //return CreatedAtAction("Cadastro Usuario", new { message = "Usuário cadastrado com sucesso." });
         }
     }
 }
