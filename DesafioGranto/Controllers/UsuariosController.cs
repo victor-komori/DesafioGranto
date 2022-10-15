@@ -2,7 +2,7 @@
 using DesafioGranto.Models.Entities;
 using DesafioGranto.Services.Interface;
 using DesafioGranto.Models.DTO;
-using DesafioGranto.Models;
+using DesafioGranto.Models.Enum;
 
 namespace DesafioGranto.Controllers
 {

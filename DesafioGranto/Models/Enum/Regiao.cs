@@ -1,4 +1,4 @@
-﻿namespace DesafioGranto.Models
+﻿namespace DesafioGranto.Models.Enum
 {
     public enum Regiao
     {

@@ -1,5 +1,5 @@
-﻿using DesafioGranto.Models;
-using DesafioGranto.Models.Entities;
+﻿using DesafioGranto.Models.Entities;
+using DesafioGranto.Models.Enum;
 using DesafioGranto.Repositories.Interface;
 using DesafioGranto.Services.Interface;
 using Newtonsoft.Json.Linq;

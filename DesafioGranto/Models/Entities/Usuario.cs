@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using DesafioGranto.Models.Enum;
 
 namespace DesafioGranto.Models.Entities
 {
