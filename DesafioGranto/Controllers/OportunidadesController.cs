@@ -11,10 +11,12 @@ namespace DesafioGranto.Controllers
     public class OportunidadesController : ControllerBase
     {
         private readonly IOportunidadeService _oportunidadeService;
+        private readonly IPublicaService _publicaService;
 
-        public OportunidadesController(IOportunidadeService oportunidadeService)
+        public OportunidadesController(IOportunidadeService oportunidadeService, IPublicaService publicaService)
         {
             _oportunidadeService = oportunidadeService;
+            _publicaService = publicaService;
         }
 
         /// <summary>
@@ -35,10 +37,11 @@ namespace DesafioGranto.Controllers
                 {
                     Cnpj = CpfCnpjUtils.SemFormatacao(oportunidadeCadastro.Cnpj),
                     Nome = oportunidadeCadastro.Nome,
-                    ValorMonetario = oportunidadeCadastro.Valor
+                    ValorMonetario = oportunidadeCadastro.Valor,
+                    DataOportunidade = DateTime.Now
                 };
-
-                await _oportunidadeService.Cadastrar(oportunidade);
+                var json = await _publicaService.ConsultarCnpj(oportunidade.Cnpj);
+                await _oportunidadeService.Cadastrar(oportunidade, json);
 
                 return CreatedAtAction("CadastroOportunidade", new { message = "Oportunidade cadastrada com sucesso." });
             } catch (Exception exception)

@@ -20,6 +20,11 @@ namespace DesafioGranto.Models
             modelBuilder.Entity<Oportunidade>()
                 .Property(b => b.ValorMonetario)
                 .HasPrecision(10,2);
+
+            modelBuilder.Entity<Oportunidade>()
+                .HasOne<Usuario>(o => o.Usuario)
+                .WithMany(u => u.Oportunidades)
+                .HasForeignKey(o => o.UsuarioId);
         }
 
         public DbSet<Usuario> Usuario { get; set; }

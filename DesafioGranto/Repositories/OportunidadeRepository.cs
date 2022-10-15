@@ -16,9 +16,10 @@ namespace DesafioGranto.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> Cadastrar(Oportunidade oportunidade)
+        public void Cadastrar(Oportunidade oportunidade)
         {
-            throw new NotImplementedException();
+            _context.Add(oportunidade);
+            _context.SaveChanges();
         }
     }
 }
