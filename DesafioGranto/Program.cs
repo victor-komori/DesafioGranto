@@ -6,6 +6,8 @@ using DesafioGranto.Services;
 using DesafioGranto.Repositories.Interface;
 using DesafioGranto.Repositories;
 using System.Reflection;
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IOportunidadeService, OportunidadeService>();
+builder.Services.AddScoped<IPublicaService, PublicaService>();
 
 //Repositories
 
@@ -24,7 +27,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IOportunidadeRepository, OportunidadeRepository>();
 
 builder.Services.AddDbContext<DesafioContext>(opt =>
-    opt.UseSqlServer("Password=sa123;Persist Security Info=True;User ID=sa;Initial Catalog=DesafioGranto;Data Source=DESKTOP-7PR90UG"));
+    opt.UseSqlServer(builder.Configuration["sqlserverconnection:connectionString"]));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
