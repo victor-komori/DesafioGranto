@@ -17,6 +17,10 @@ namespace DesafioGranto.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Usuario>()
+                .Property(u => u.Regiao)
+                .HasConversion<int>();
+
             modelBuilder.Entity<Oportunidade>()
                 .Property(b => b.ValorMonetario)
                 .HasPrecision(10,2);

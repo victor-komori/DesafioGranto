@@ -41,6 +41,9 @@ namespace DesafioGranto.Controllers
                     DataOportunidade = DateTime.Now
                 };
                 var json = await _publicaService.ConsultarCnpj(oportunidade.Cnpj);
+                oportunidade.RazaoSocial = (string?)json["razao_social"];
+                oportunidade.DescricaoAtividade = (string?)json["estabelecimento"]["atividade_principal"]["descricao"];
+
                 await _oportunidadeService.Cadastrar(oportunidade, json);
 
                 return CreatedAtAction("CadastroOportunidade", new { message = "Oportunidade cadastrada com sucesso." });

@@ -11,10 +11,6 @@ namespace DesafioGranto.Repositories
         {
             _context = desafioContext;
         }
-        public Task<Oportunidade> BuscarOportunidadeUsuario(long id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Cadastrar(Oportunidade oportunidade)
         {

@@ -19,9 +19,9 @@ namespace DesafioGranto.Services
             _usuarioRepository.Cadastrar(usuario);
         }
 
-        public Task<Usuario> FindById(string email)
+        public Task<Usuario> FindByEmail(string email)
         {
-            return _usuarioRepository.FindById(email);
+            return _usuarioRepository.FindByEmail(email);
         }
     }
 }

@@ -19,31 +19,18 @@ namespace DesafioGranto.Repositories
             _context.SaveChanges();
         }
 
-        public async Task<Usuario> FindById(string email)
+        public Task<Usuario> FindByEmail(string email)
         {
-            return _context.Usuario.Where(u => u.Email == email).FirstOrDefault();
+            return _context.Usuario.Where(u => u.Email == email).FirstOrDefaultAsync();
         }
 
         public Task<List<Usuario>> FindByRegiaoOrderDataOportunidade(int regiao)
         {
-            //var sql = "SELECT * FROM Usuario US " +
-            //"LEFT JOIN Oportunidade OP ON OP.UsuarioId = US.Id " +
-            //"ORDER BY OP.DataOportunidade DESC";
-            //var teste = _context.Database.(sql);
-            try
-            {
-                var x = _context.Usuario
+            return _context.Usuario
                                 .Include(u => u.Oportunidades)
-                                .Where(u => u.Regiao == regiao)
+                                .Where(u => u.Regiao == (Regiao)regiao)
                                 .OrderByDescending(u => u.Oportunidades.Select(o => o.DataOportunidade).Max())
                                 .ToListAsync();
-                return x;
-            } catch (Exception ex)
-            {
-                throw ex;
-            }
-            
-            //return _context.Usuario.Include(u => u.Oportunidades).OrderBy(o => o.)
         }
     }
 }

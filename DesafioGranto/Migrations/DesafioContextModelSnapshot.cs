@@ -58,7 +58,7 @@ namespace DesafioGranto.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Oportunidade");
+                    b.ToTable("Oportunidade", (string)null);
                 });
 
             modelBuilder.Entity("DesafioGranto.Models.Entities.Usuario", b =>
@@ -82,7 +82,7 @@ namespace DesafioGranto.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuario");
+                    b.ToTable("Usuario", (string)null);
                 });
 
             modelBuilder.Entity("DesafioGranto.Models.Entities.Oportunidade", b =>

@@ -2,6 +2,7 @@
 using DesafioGranto.Models.Entities;
 using DesafioGranto.Services.Interface;
 using DesafioGranto.Models.DTO;
+using DesafioGranto.Models;
 
 namespace DesafioGranto.Controllers
 {
@@ -27,13 +28,13 @@ namespace DesafioGranto.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> CadastroUsuario(UsuarioCadastroDTO usuarioCadastro)
         {
-            var usuarioExistente = await _usuarioService.FindById(usuarioCadastro.Email);
+            var usuarioExistente = await _usuarioService.FindByEmail(usuarioCadastro.Email);
             if (usuarioExistente is null)
             {
                 Usuario usuario = new();
                 usuario.Nome = usuarioCadastro.Nome;
                 usuario.Email = usuarioCadastro.Email;
-                usuario.Regiao = usuarioCadastro.Regiao;
+                usuario.Regiao = (Regiao)usuarioCadastro.Regiao;
                 _usuarioService.Cadastrar(usuario);
                 return CreatedAtAction("CadastroUsuario", new { message = "Usuário cadastrado com sucesso." });
             }
