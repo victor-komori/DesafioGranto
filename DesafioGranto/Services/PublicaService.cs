@@ -15,7 +15,8 @@ namespace DesafioGranto.Services
                 if (response.IsSuccessStatusCode)
                 {
                     return json;
-                } else
+                }
+                else
                 {
                     throw new Exception((string?)json["detalhes"]);
                 }

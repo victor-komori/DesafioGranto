@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using DesafioGranto.Models.DTO;
 using DesafioGranto.Models.Entities;
 using DesafioGranto.Services.Interface;
-using DesafioGranto.Models.DTO;
-using DesafioGranto.Models.Enum;
-using System;
-using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DesafioGranto.Controllers
 {
@@ -22,24 +20,23 @@ namespace DesafioGranto.Controllers
         }
 
         /// <summary>
-        /// Cadastra um novo usuário.
+        /// Cadastra um novo Vendedor.
         /// </summary>
-        /// <param name="usuarioCadastro"></param>
-        /// <returns></returns>
+        /// <param name="usuarioCadastro">Json com os dados para cadastrar o vendedor</param>
+        /// <response code="201">Vendedor cadastrado com sucesso</response>
+        /// <response code="409">Email já cadastrado</response>
+        /// <response code="500">Erro interno do servidor</response>
         [HttpPost]
         [Consumes("application/json")]
-        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(void), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CadastroUsuario(UsuarioCadastroDTO usuarioCadastro)
         {
             var usuarioExistente = await _usuarioService.FindByEmail(usuarioCadastro.Email);
             if (usuarioExistente is null)
             {
-                Usuario usuario = new();
-                usuario.Nome = usuarioCadastro.Nome;
-                usuario.Email = usuarioCadastro.Email;
-                usuario.Regiao = (Regiao)usuarioCadastro.Regiao;
+                var usuario = _mapper.Map<Usuario>(usuarioCadastro);
                 _usuarioService.Cadastrar(usuario);
                 return CreatedAtAction("CadastroUsuario", new { message = "Usuário cadastrado com sucesso." });
             }
@@ -62,7 +59,7 @@ namespace DesafioGranto.Controllers
         [ProducesResponseType(typeof(UsuarioDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetUsuarioByEmail([FromHeader]string email)
+        public async Task<IActionResult> GetUsuarioByEmail([FromHeader] string email)
         {
             try
             {

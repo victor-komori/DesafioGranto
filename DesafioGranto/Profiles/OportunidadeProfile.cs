@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DesafioGranto.Models.DTO;
 using DesafioGranto.Models.Entities;
+using DesafioGranto.Models.Utils;
 
 namespace DesafioGranto.Profiles
 {
@@ -32,6 +33,20 @@ namespace DesafioGranto.Profiles
                 .ForMember(
                     dest => dest.DataOportunidade,
                     opt => opt.MapFrom(src => $"{src.DataOportunidade}")
+                );
+
+            CreateMap<OportunidadeCadastroDTO, Oportunidade>()
+                .ForMember(
+                    dest => dest.Cnpj,
+                    opt => opt.MapFrom(src => $"{CpfCnpjUtils.SemFormatacao(src.Cnpj)}")
+                )
+                .ForMember(
+                    dest => dest.Nome,
+                    opt => opt.MapFrom(src => $"{src.Nome}")
+                )
+                .ForMember(
+                    dest => dest.ValorMonetario,
+                    opt => opt.MapFrom(src => $"{src.Valor}")
                 );
         }
     }

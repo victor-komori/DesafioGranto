@@ -1,13 +1,11 @@
-using Microsoft.EntityFrameworkCore;
 using DesafioGranto.Models;
-using Microsoft.OpenApi.Models;
-using DesafioGranto.Services.Interface;
-using DesafioGranto.Services;
-using DesafioGranto.Repositories.Interface;
 using DesafioGranto.Repositories;
+using DesafioGranto.Repositories.Interface;
+using DesafioGranto.Services;
+using DesafioGranto.Services.Interface;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
-using Microsoft.AspNetCore.Diagnostics;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +50,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.DefaultModelsExpandDepth(-1);
+    });
 }
 
 app.UseHttpsRedirection();

@@ -10,7 +10,7 @@ namespace DesafioGranto.Services
     {
         private readonly IOportunidadeRepository _oportunidadeRepository;
         private readonly IUsuarioRepository _usuarioRepository;
-        
+
         public OportunidadeService(IOportunidadeRepository oportunidadeRepository, IUsuarioRepository usuarioRepository)
         {
             _oportunidadeRepository = oportunidadeRepository;
