@@ -1,4 +1,4 @@
-﻿using DesafioGranto.Models;
+﻿using DesafioGranto.Data;
 using DesafioGranto.Models.Entities;
 using DesafioGranto.Repositories.Interface;
 

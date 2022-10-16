@@ -1,4 +1,4 @@
-using DesafioGranto.Models;
+using DesafioGranto.Data;
 using DesafioGranto.Repositories;
 using DesafioGranto.Repositories.Interface;
 using DesafioGranto.Services;
