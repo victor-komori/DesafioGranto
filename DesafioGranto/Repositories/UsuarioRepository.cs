@@ -20,9 +20,9 @@ namespace DesafioGranto.Repositories
             _context.SaveChanges();
         }
 
-        public Task<Usuario> FindByEmail(string email)
+        public async Task<Usuario> FindByEmail(string email)
         {
-            return _context.Usuario.Where(u => u.Email == email).FirstOrDefaultAsync();
+            return await _context.Usuario.AsNoTracking().Include(u => u.Oportunidades).AsNoTracking().Where(u => u.Email == email).FirstOrDefaultAsync();
         }
 
         public Task<List<Usuario>> FindByRegiaoOrderDataOportunidade(int regiao)
