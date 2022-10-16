@@ -25,7 +25,9 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IOportunidadeRepository, OportunidadeRepository>();
 
 builder.Services.AddDbContext<DesafioContext>(opt =>
-    opt.UseSqlServer(builder.Configuration["sqlserverconnection:connectionString"]));
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("sqlServerConnectionString"));
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 

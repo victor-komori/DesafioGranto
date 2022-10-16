@@ -1,6 +1,5 @@
 ﻿using DesafioGranto.Models.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
 
 namespace DesafioGranto.Data
 {
@@ -8,11 +7,6 @@ namespace DesafioGranto.Data
     {
         public DesafioContext(DbContextOptions<DesafioContext> options) : base(options)
         {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Password=sa123;Persist Security Info=True;User ID=sa;Initial Catalog=DesafioGranto;Data Source=DESKTOP-7PR90UG");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

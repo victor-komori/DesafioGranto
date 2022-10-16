@@ -10,39 +10,17 @@ namespace DesafioGranto.Profiles
         {
             CreateMap<Usuario, UsuarioDTO>()
                 .ForMember(
-                    dest => dest.Nome,
-                    opt => opt.MapFrom(src => $"{src.Nome}")
-                )
-                .ForMember(
-                    dest => dest.Email,
-                    opt => opt.MapFrom(src => $"{src.Email}")
-                )
-                .ForMember(
-                    dest => dest.Regiao,
-                    opt => opt.MapFrom(src => $"{src.Regiao}")
-                )
-                .ForMember(
                     dest => dest.Oportunidades,
                     opt => opt.Ignore()
-                );
+                )
+                .ReverseMap();
 
             CreateMap<UsuarioCadastroDTO, Usuario>()
                 .ForMember(
-                    dest => dest.Nome,
-                    opt => opt.MapFrom(src => $"{src.Nome}")
-                )
-                .ForMember(
-                    dest => dest.Email,
-                    opt => opt.MapFrom(src => $"{src.Email}")
-                )
-                .ForMember(
-                    dest => dest.Regiao,
-                    opt => opt.MapFrom(src => $"{src.Regiao}")
-                )
-                .ForMember(
                     dest => dest.Oportunidades,
                     opt => opt.Ignore()
-                );
+                )
+                .ReverseMap();
         }
     }
 }
