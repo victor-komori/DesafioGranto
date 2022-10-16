@@ -10,7 +10,7 @@ namespace DesafioGranto.Models.DTO
         [Required]
         public string Nome { get; set; }
         [Required]
-        public decimal ValorMonetario { get; set; }
+        public decimal? ValorMonetario { get; set; }
 
     }
 }
