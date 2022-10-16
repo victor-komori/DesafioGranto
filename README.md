@@ -7,7 +7,7 @@ Camada dos Controllers que tem o objetivo de receber as requisições, tratar os
 Camada dos Services que é aonde fica a lógica de negócio do sistema.
 Camada dos Repositories que tem o objetivo de fazer a ponte entre os services e o banco de dados, sem precisar se importar com a lógica de negócio.
 
-1º Endpoint (POST) Cadastro de vendedor:
+# 1º Endpoint (POST) Cadastro de vendedor:
 
 Para cadastrar o vendedor a API irá receber um Json contendo os dados desse vendedor. Em seguida esses dados serão mapeados para a entidade e serão gravados no banco de dados.
 
